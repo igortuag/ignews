@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>Document</title>
+          <title>ig.news</title>
         </Head>
         <body>
           <Main />
