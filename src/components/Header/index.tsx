@@ -1,3 +1,9 @@
 export function Header() {
-  return <div>Header</div>;
+  return (
+    <header>
+      <div>
+        <img src="/images/logo.svg" alt="ig.news" />
+      </div>
+    </header>
+  );
 }
