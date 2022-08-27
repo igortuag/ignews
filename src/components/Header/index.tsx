@@ -5,10 +5,10 @@ export function Header() {
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <img src="/images/logo.svg" alt="ig.news" />
-        <div>
+        <nav>
           <a className={styles.active}>Home</a>
           <a>Posts</a>
-        </div>
+        </nav>
       </div>
     </header>
   );
