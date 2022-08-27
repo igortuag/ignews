@@ -33,11 +33,16 @@ body {
   color: var(--white);
 }
 
-body, input, textarea, select, button {
+body,
+input,
+textarea,
+select,
+button {
   font: 400 1rem "Roboto", sans-serif;
 }
 
-button {
+button,
+a {
   cursor: pointer;
 }
 
