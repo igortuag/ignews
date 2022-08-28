@@ -4,7 +4,7 @@ export default function SignInButton() {
   return (
     <button>
       <FaGithub />
-      SignInButton
+      Sign in with Github
     </button>
   );
 }
