@@ -5,6 +5,9 @@ export default function Home() {
     <main>
       <section>
         <span>👏 Hey, welcome</span>
+        <h1>
+          News about the <span>React </span> world.
+        </h1>
       </section>
 
       <img src="/iamges/avatar.svg" alt="Girl coding" />
