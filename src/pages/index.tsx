@@ -1,8 +1,8 @@
-import styles from "../styles/home.module.scss";
+import styles from "./home.module.scss";
 
 export default function Home() {
   return (
-    <main>
+    <main className={styles.contentContainer}>
       <section>
         <span>👏 Hey, welcome</span>
         <h1>
@@ -14,7 +14,7 @@ export default function Home() {
         </p>
       </section>
 
-      <img src="/iamges/avatar.svg" alt="Girl coding" />
+      <img src="/images/avatar.svg" alt="Girl coding" className={styles.hero} />
     </main>
   );
 }
