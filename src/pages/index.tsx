@@ -1,9 +1,9 @@
-import styles from "../styles/home.module.scss";
+import styles from "./home.module.scss";
 
 export default function Home() {
   return (
-    <main>
-      <section>
+    <main className={styles.contentContainer}>
+      <section className={styles.hero}>
         <span>👏 Hey, welcome</span>
         <h1>
           News about the <span>React </span> world.
@@ -14,7 +14,7 @@ export default function Home() {
         </p>
       </section>
 
-      <img src="/iamges/avatar.svg" alt="Girl coding" />
+      <img src="/images/avatar.svg" alt="Girl coding" />
     </main>
   );
 }
