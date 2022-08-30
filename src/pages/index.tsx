@@ -3,7 +3,7 @@ import styles from "./home.module.scss";
 export default function Home() {
   return (
     <main className={styles.contentContainer}>
-      <section>
+      <section className={styles.hero}>
         <span>👏 Hey, welcome</span>
         <h1>
           News about the <span>React </span> world.
@@ -14,7 +14,7 @@ export default function Home() {
         </p>
       </section>
 
-      <img src="/images/avatar.svg" alt="Girl coding" className={styles.hero} />
+      <img src="/images/avatar.svg" alt="Girl coding" />
     </main>
   );
 }
