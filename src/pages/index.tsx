@@ -28,5 +28,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
     expand: ["product"],
   });
 
+  const product = {
+    priceId: price.id,
+    amount: new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price.unit_amount / 100),
+  };
+
   return { props: {} };
 };
