@@ -3,7 +3,14 @@ import SubscribeButton from "../components/SubscribeButton";
 import { stripe } from "../services/stripe";
 import styles from "./home.module.scss";
 
-export default function Home() {
+interface HomeProps {
+  product: {
+    priceId: string;
+    amount: number;
+  };
+}
+
+export default function Home({ product }: HomeProps) {
   return (
     <main className={styles.contentContainer}>
       <section className={styles.hero}>
@@ -36,5 +43,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }).format(price.unit_amount / 100),
   };
 
-  return { props: {} };
+  return {
+    props: {
+      product,
+    },
+  };
 };
