@@ -20,7 +20,7 @@ export default function Home({ product }: HomeProps) {
         </h1>
         <p>
           Get access to all the publications <br />
-          <span>for $9.99 / month</span>
+          <span>for {product.amount} / month</span>
         </p>
         <SubscribeButton />
       </section>
