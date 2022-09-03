@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import SubscribeButton from "../components/SubscribeButton";
+import { stripe } from "../services/stripe";
 import styles from "./home.module.scss";
 
 export default function Home() {
@@ -23,5 +24,9 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const price = await stripe.prices.retrieve("price_1LdBoGDh99IwFTOfPZHwDbhd", {
+    expand: ["product"],
+  });
+
   return { props: {} };
 };
