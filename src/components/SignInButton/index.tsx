@@ -1,10 +1,11 @@
 import { FaGithub } from "react-icons/fa";
 import { FiX } from "react-icons/fi";
+import { signIn } from "next-auth/react";
 
 import styles from "./styles.module.scss";
 
 export default function SignInButton() {
-  const isUserLoggedIn = true;
+  const isUserLoggedIn = false;
 
   if (isUserLoggedIn) {
     return (
@@ -17,7 +18,7 @@ export default function SignInButton() {
   }
 
   return (
-    <button className={styles.signInButton}>
+    <button className={styles.signInButton} onClick={() => signIn("github")}>
       <FaGithub color="#eba417" />
       Sign in with Github
     </button>
