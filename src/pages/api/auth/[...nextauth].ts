@@ -10,5 +10,12 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  callbacks: {
+    async signIn(user, account, profile) {
+      console.log("user ::>>", user);
+
+      return true;
+    },
+  },
 };
 export default NextAuth(authOptions);
