@@ -14,6 +14,10 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  jwt: {
+    maxAge: 60 * 60 * 24 * 30,
+    secret: process.env.JWT_SIGNING_PRIVATE_KEY,
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
