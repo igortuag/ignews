@@ -16,17 +16,21 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      await fauna.query(
-        q.Create(q.Collection("users"), {
-          data: {
-            email: user.email,
-            name: user.name,
-            image: user.image,
-          },
-        })
-      );
+      try {
+        await fauna.query(
+          q.Create(q.Collection("users"), {
+            data: {
+              email: user.email,
+              name: user.name,
+              image: user.image,
+            },
+          })
+        );
 
-      return true;
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
   },
 };
