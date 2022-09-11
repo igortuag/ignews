@@ -15,7 +15,7 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    async signIn(user, account, profile) {
+    async signIn({ user, account, profile }) {
       await fauna.query(
         q.Create(q.Collection("users"), {
           data: {
@@ -30,4 +30,5 @@ export const authOptions = {
     },
   },
 };
+
 export default NextAuth(authOptions);
