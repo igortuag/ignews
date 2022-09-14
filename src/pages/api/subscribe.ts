@@ -34,7 +34,7 @@ const Subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
         cancel_url: process.env.STRIPE_CANCEL_URL,
       });
 
-      return res.status(201).json({ ok: true });
+      return res.status(201).json({ sessionId: stripeCheckoutSession.id });
     } catch (error) {
       return res.status(500).json({ error: "Something went wrong" });
     }
