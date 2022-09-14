@@ -4,7 +4,11 @@ import { stripe } from "../../services/stripe";
 
 const Subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const session = await getSession({ req });
+    const { user } = await getSession({ req });
+
+    const stripeCustomer = await stripe.customers.create({
+      email: user.email,
+    });
 
     const { email } = req.body;
     const { priceId } = req.body;
@@ -14,7 +18,8 @@ const Subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-      const checkoutSession = await stripe.checkout.sessions.create({
+      const stripeCheckoutSession = await stripe.checkout.sessions.create({
+        customer: stripeCustomer.id,
         payment_method_types: ["card"],
         billing_address_collection: "required",
         line_items: [
