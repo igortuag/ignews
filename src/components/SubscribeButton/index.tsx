@@ -1,5 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
 import React from "react";
+import { api } from "../../services/api";
 
 import styles from "./styles.module.scss";
 
@@ -10,13 +11,21 @@ interface SubscribeButtonProps {
 export default function SubscribeButton({ priceId }: SubscribeButtonProps) {
   const { data: session } = useSession();
 
-  function handleSubscribe() {
+  async function handleSubscribe() {
     if (!session) {
       signIn("github");
       return;
     }
 
-    // create checkout session
+    try {
+      const response = await api.post("/subscribe");
+
+      const { sessionId } = response.data;
+
+   
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   return (
