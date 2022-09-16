@@ -10,24 +10,14 @@ const Subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
       email: user.email,
     });
 
-    const { email } = req.body;
     const { priceId } = req.body;
-
-    if (!email) {
-      return res.status(400).json({ error: "Email is required" });
-    }
 
     try {
       const stripeCheckoutSession = await stripe.checkout.sessions.create({
         customer: stripeCustomer.id,
         payment_method_types: ["card"],
         billing_address_collection: "required",
-        line_items: [
-          {
-            price: priceId,
-            quantity: 1,
-          },
-        ],
+        line_items: [{ price: priceId, quantity: 1 }],
         mode: "subscription",
         allow_promotion_codes: true,
         success_url: process.env.STRIPE_SUCCESS_URL,
