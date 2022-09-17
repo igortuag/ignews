@@ -4,11 +4,17 @@ import { getSession } from "next-auth/react";
 import { fauna } from "../../services/fauna";
 import { stripe } from "../../services/stripe";
 
+type User = {
+  ref: {
+    id: string;
+  };
+}
+
 const Subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const session = await getSession({ req });
 
-    const user = await fauna.query(
+    const user = await fauna.query<User>(
       q.Get(q.Match(q.Index("user_by_email"), q.Casefold(session.user.email)))
     );
 
