@@ -23,6 +23,7 @@ export const config = {
 const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
+    const secret = req.headers["stripe-signature"];
   
     res.status(200).json({ message: "Hello" });
   } else {
