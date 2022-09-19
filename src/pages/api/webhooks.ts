@@ -13,8 +13,8 @@ async function buffer(readable: Readable) {
   return Buffer.concat(chunks);
 }
 
-const Webhooks = (req: NextApiRequest, res: NextApiResponse) => {
-  
+const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
+  const buf = await buffer(req);
   
   res.status(200).json({ message: "Hello" });
 };
