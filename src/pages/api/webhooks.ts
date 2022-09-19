@@ -13,6 +13,13 @@ async function buffer(readable: Readable) {
   return Buffer.concat(chunks);
 }
 
+
+export const config = {
+  api: {
+    bodyParser: false,
+  }
+}
+
 const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
   const buf = await buffer(req);
   
