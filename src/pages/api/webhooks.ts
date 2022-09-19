@@ -21,9 +21,14 @@ export const config = {
 }
 
 const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
-  const buf = await buffer(req);
+  if (req.method === "POST") {
+    const buf = await buffer(req);
   
-  res.status(200).json({ message: "Hello" });
+    res.status(200).json({ message: "Hello" });
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
+  }
 };
 
 export default Webhooks;
