@@ -1,8 +1,35 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Readable } from "stream";
 
-const Webhooks = (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req.body);
-  res.status(200).json({ message: "Hello" });
+async function buffer(readable: Readable) {
+  const chunks = [];
+
+  for await (const chunk of readable) {
+    chunks.push(
+      typeof chunk === "string" ? Buffer.from(chunk) : chunk
+    );
+  }
+
+  return Buffer.concat(chunks);
+}
+
+
+export const config = {
+  api: {
+    bodyParser: false,
+  }
+}
+
+const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === "POST") {
+    const buf = await buffer(req);
+    const secret = req.headers["stripe-signature"];
+  
+    res.status(200).json({ message: "Hello" });
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
+  }
 };
 
 export default Webhooks;
