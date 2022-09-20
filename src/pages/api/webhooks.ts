@@ -19,9 +19,7 @@ export const config = {
   },
 };
 
-const relevantEvents = new Set([
-  "checkout.session.completed",
-]);
+const relevantEvents = new Set(["checkout.session.completed"]);
 
 const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
@@ -40,7 +38,7 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    const type = event.type;
+    const { type } = event;
 
     if (relevantEvents.has(type)) {
       console.log("Event received", event);
