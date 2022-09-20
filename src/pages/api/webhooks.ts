@@ -36,6 +36,8 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
+    const type = event.type;
+
     res.status(200).json({ message: "Hello" });
   } else {
     res.setHeader("Allow", "POST");
