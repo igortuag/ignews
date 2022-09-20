@@ -19,6 +19,10 @@ export const config = {
   },
 };
 
+const relevantEvents = new Set([
+  "checkout.session.completed",
+]);
+
 const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
@@ -38,7 +42,11 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const type = event.type;
 
-    res.status(200).json({ message: "Hello" });
+    if (relevantEvents.has(type)) {
+      // todo
+    }
+
+    res.status(200).json({ received: true });
   } else {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");
