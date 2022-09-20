@@ -43,10 +43,10 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
     const type = event.type;
 
     if (relevantEvents.has(type)) {
-      // todo
+      console.log("Event received", event);
     }
 
-    res.status(200).json({ received: true });
+    res.json({ received: true });
   } else {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");
