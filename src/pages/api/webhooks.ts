@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Readable } from "stream";
+import Stripe from "stripe";
 
 async function buffer(readable: Readable) {
   const chunks = [];
@@ -24,6 +25,8 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
     const secret = req.headers["stripe-signature"];
+
+    let event: Stripe.Event;
   
     res.status(200).json({ message: "Hello" });
   } else {
