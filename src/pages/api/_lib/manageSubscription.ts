@@ -12,4 +12,9 @@ export async function saveSubscription(
       q.Get(q.Match(q.Index("user_by_stripe_customer_id"), customerId)),
     ),
   );
+
+  const subscription = await fauna.query(
+    q.Get(q.Match(q.Index("subscription_by_id"), subscriptionId)),
+  );
+
 }
