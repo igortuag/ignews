@@ -41,7 +41,17 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
     const { type } = event;
 
     if (relevantEvents.has(type)) {
-      console.log("Event received", event);
+      try {
+        switch (type) {
+          case "checkout.session.completed":
+            console.log("Checkout session completed");
+            break;
+          default:
+            throw new Error("Unhandled event.");
+        }
+      } catch (err) {
+        return res.json({ error: "Webhook handler failed." });
+      }
     }
 
     res.json({ received: true });
