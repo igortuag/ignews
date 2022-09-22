@@ -1,6 +1,7 @@
 import { fauna } from "../../../services/fauna";
 
 import { query as q } from "faunadb";
+import { stripe } from "../../../services/stripe";
 
 export async function saveSubscription(
   subscriptionId: string,
@@ -13,8 +14,14 @@ export async function saveSubscription(
     ),
   );
 
-  const subscription = await fauna.query(
-    q.Get(q.Match(q.Index("subscription_by_id"), subscriptionId)),
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  const subscriptionData = {
+    id: subscription.id,
+    userId: userRef,
+    status: subscription.status,
+    price_id: subscription.items.data[0].price.id,
+  }
   );
 
 }
