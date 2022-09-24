@@ -56,7 +56,8 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
 
             await saveSubscription(
               subscription.id,
-              subscription.customer.toString()
+              subscription.customer.toString(),
+              type === "customer.subscription.created"
             );
 
             break;
@@ -66,7 +67,8 @@ const Webhooks = async (req: NextApiRequest, res: NextApiResponse) => {
 
             await saveSubscription(
               checkoutSession.subscription.toString(),
-              checkoutSession.customer.toString()
+              checkoutSession.customer.toString(),
+              true
             );
 
             break;
