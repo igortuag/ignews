@@ -9,7 +9,58 @@ export default function Posts() {
       </Head>
 
       <main className={styles.container}>
-        <div></div>
+        <div>
+          <a>
+            <time>Mar 10, 2021</time>
+            <strong>Getting started with Next.js</strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              quod, voluptatum, quia, voluptates quas voluptatibus quae
+              necessitatibus voluptate quibusdam quidem quos. Quisquam, quae
+              voluptates. Quisquam, quae voluptates.
+            </p>
+          </a>
+          <a>
+            <time>Mar 10, 2021</time>
+            <strong>Getting started with Next.js</strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              quod, voluptatum, quia, voluptates quas voluptatibus quae
+              necessitatibus voluptate quibusdam quidem quos. Quisquam, quae
+              voluptates. Quisquam, quae voluptates.
+            </p>
+          </a>
+          <a>
+            <time>Mar 10, 2021</time>
+            <strong>Getting started with Next.js</strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              quod, voluptatum, quia, voluptates quas voluptatibus quae
+              necessitatibus voluptate quibusdam quidem quos. Quisquam, quae
+              voluptates. Quisquam, quae voluptates.
+            </p>
+          </a>
+          <a>
+            <time>Mar 10, 2021</time>
+            <strong>Getting started with Next.js</strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              quod, voluptatum, quia, voluptates quas voluptatibus quae
+              necessitatibus voluptate quibusdam quidem quos. Quisquam, quae
+              voluptates. Quisquam, quae voluptates.
+            </p>
+          </a>
+          <a>
+            <time>Mar 10, 2021</time>
+            <strong>Getting started with Next.js</strong>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              quod, voluptatum, quia, voluptates quas voluptatibus quae
+              necessitatibus voluptate quibusdam quidem quos. Quisquam, quae
+              voluptates. Quisquam, quae voluptates.
+            </p>
+          </a>
+        </div>
       </main>
     </>
   );
