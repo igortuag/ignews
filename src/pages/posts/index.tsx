@@ -9,7 +9,7 @@ export default function Posts() {
       </Head>
 
       <main className={styles.container}>
-        <div>
+        <div className={styles.posts}>
           <a>
             <time>Mar 10, 2021</time>
             <strong>Getting started with Next.js</strong>
