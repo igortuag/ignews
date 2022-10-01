@@ -5,7 +5,14 @@ import styles from "./styles.module.scss";
 import Prismic from "@prismicio/client";
 import { RichText } from "prismic-dom";
 
-export default function Posts() {
+interface PostsProps {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
