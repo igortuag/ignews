@@ -5,9 +5,13 @@ interface ActiveLinkProps extends LinkProps {
   activeClassName: string;
 }
 
-export function ActiveLink({ children, href }: ActiveLinkProps) {
+export function ActiveLink({
+  children,
+  activeClassName,
+  ...props
+}: ActiveLinkProps) {
   return (
-    <Link href={href}>
+    <Link {...props}>
       <a>{children}</a>
     </Link>
   );
