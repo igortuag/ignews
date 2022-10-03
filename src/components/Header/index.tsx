@@ -4,18 +4,22 @@ import SignInButton from "../SignInButton";
 import styles from "./styles.module.scss";
 
 export function Header() {
-  const { asPath } = useRouter()
+  const { asPath } = useRouter();
 
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <img src="/images/logo.svg" alt="ig.news" />
         <nav>
-          <Link href="/" className={styles.active}>
+          <Link href="/" className={asPath === "/" ? styles.active : ""}>
             <a>Home</a>
           </Link>
 
-          <Link href="/posts" prefetch>
+          <Link
+            href="/posts"
+            className={asPath === "/posts" ? styles.active : ""}
+            prefetch
+          >
             <a>Posts</a>
           </Link>
         </nav>
