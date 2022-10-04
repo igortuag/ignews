@@ -1,4 +1,5 @@
 import Link, { LinkProps } from "next/link";
+import { useRouter } from "next/router";
 
 interface ActiveLinkProps extends LinkProps {
   children: React.ReactNode;
@@ -10,8 +11,12 @@ export function ActiveLink({
   activeClassName,
   ...props
 }: ActiveLinkProps) {
+  const { asPath } = useRouter();
+
   return (
-    <Link {...props}>
+    <Link {...props}
+      className={asPath === props.href ? activeClassName : ""}
+    >
       {children}
     </Link>
   );
