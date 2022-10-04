@@ -12,7 +12,7 @@ export function ActiveLink({
 }: ActiveLinkProps) {
   return (
     <Link {...props}>
-      <a>{children}</a>
+      {children}
     </Link>
   );
 }
