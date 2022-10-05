@@ -1,3 +1,5 @@
+import { GetServerSideProps } from "next";
+
 export default function Post() {
   return (
     <div>
@@ -5,3 +7,9 @@ export default function Post() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
