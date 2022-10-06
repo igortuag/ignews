@@ -19,6 +19,16 @@ export default function Post({ post }: PostPreviewProps) {
       <Head>
         <title>{post.title} | ig.news</title>
       </Head>
+
+      <main>
+        <article>
+          <h1>{post.title}</h1>
+          <time>{post.updatedAt}</time>
+          <div
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </article>
+      </main>
     </>
   );
 }
