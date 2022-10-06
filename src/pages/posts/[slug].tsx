@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { getPrismicClient } from "../../services/prismic";
 import { RichText } from "prismic-dom";
+import { Head } from "next/document";
 
 interface PostPreviewProps {
   post: {
@@ -14,9 +15,11 @@ interface PostPreviewProps {
 
 export default function Post({ post }: PostPreviewProps) {
   return (
-    <div>
-      <h1>Post</h1>
-    </div>
+    <>
+      <Head>
+        <title>{post.title} | ig.news</title>
+      </Head>
+    </>
   );
 }
 
