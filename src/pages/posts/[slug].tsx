@@ -3,7 +3,16 @@ import { getSession } from "next-auth/react";
 import { getPrismicClient } from "../../services/prismic";
 import { RichText } from "prismic-dom";
 
-export default function Post() {
+interface PostPreviewProps {
+  post: {
+    slug: string;
+    title: string;
+    content: string;
+    updatedAt: string;
+  };
+}
+
+export default function Post({ post }: PostPreviewProps) {
   return (
     <div>
       <h1>Post</h1>
