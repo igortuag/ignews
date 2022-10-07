@@ -2,7 +2,9 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { getPrismicClient } from "../../services/prismic";
 import { RichText } from "prismic-dom";
-import { Head } from "next/document";
+import Head from "next/head";
+
+import styles from "./post.module.scss";
 
 interface PostPreviewProps {
   post: {
@@ -24,9 +26,7 @@ export default function Post({ post }: PostPreviewProps) {
         <article>
           <h1>{post.title}</h1>
           <time>{post.updatedAt}</time>
-          <div
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
       </main>
     </>
