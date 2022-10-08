@@ -19,6 +19,16 @@ export const authOptions = {
     secret: process.env.JWT_SIGNING_PRIVATE_KEY,
   },
   callbacks: {
+    async session(session) {
+      try {
+        return session;
+      } catch {
+        return {
+          ...session,
+          activeSubscription: null,
+        };
+      }
+    },
     async signIn({ user, account, profile }) {
       try {
         await fauna.query(
