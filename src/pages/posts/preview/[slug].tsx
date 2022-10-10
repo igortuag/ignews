@@ -1,12 +1,12 @@
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
-import { getPrismicClient } from "../../services/prismic";
+import { GetStaticProps } from "next";
+import { getPrismicClient } from "../../../services/prismic";
 import { RichText } from "prismic-dom";
 import Head from "next/head";
 
-import styles from "./post.module.scss";
+import styles from "../post.module.scss";
+import Link from "next/link";
 
-interface PostProps {
+interface PostPreviewProps {
   post: {
     slug: string;
     title: string;
@@ -15,7 +15,7 @@ interface PostProps {
   };
 }
 
-export default function Post({ post }: PostProps) {
+export default function PostPreview({ post }: PostPreviewProps) {
   return (
     <>
       <Head>
@@ -27,40 +27,40 @@ export default function Post({ post }: PostProps) {
           <h1>{post.title}</h1>
           <time>{post.updatedAt}</time>
           <div
-            className={styles.postContent}
+            className={`${styles.postContent} ${styles.previewContent}`}
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+
+          <div className={styles.continueReading}>
+            Wanna continue reading?
+            <Link href="#">
+              <a>Subscribe now 🤗</a>
+            </Link>
+          </div>
         </article>
       </main>
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  params,
-}) => {
-  const session = await getSession({ req });
+export const getStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
 
-  if (!session?.activeSubscription) { 
-    return {
-      redirect: {
-        destination: `/`,
-        permanent: false,
-      },
-    };
-  }
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
 
-  const prismic = getPrismicClient(req);
+  const prismic = getPrismicClient();
 
   const response = await prismic.getByUID("publication", String(slug), {});
 
   const post = {
     slug,
     title: RichText.asText(response.data.title),
-    content: RichText.asHtml(response.data.content),
+    content: RichText.asHtml(response.data.content.splice(0, 3)),
     updatedAt: new Date(response.last_publication_date).toLocaleDateString(
       "pt-BR",
       {
