@@ -6,7 +6,7 @@ import Head from "next/head";
 
 import styles from "./post.module.scss";
 
-interface PostPreviewProps {
+interface PostProps {
   post: {
     slug: string;
     title: string;
@@ -15,7 +15,7 @@ interface PostPreviewProps {
   };
 }
 
-export default function Post({ post }: PostPreviewProps) {
+export default function Post({ post }: PostProps) {
   return (
     <>
       <Head>
