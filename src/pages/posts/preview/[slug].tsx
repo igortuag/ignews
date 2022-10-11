@@ -5,6 +5,9 @@ import Head from "next/head";
 
 import styles from "../post.module.scss";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface PostPreviewProps {
   post: {
@@ -16,6 +19,15 @@ interface PostPreviewProps {
 }
 
 export default function PostPreview({ post }: PostPreviewProps) {
+  const { data: session } = useSession();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (session?.activeSubscription) {
+      push(`/posts/${post.slug}`);
+    }
+  }, [post.slug, push, session]);
+
   return (
     <>
       <Head>
