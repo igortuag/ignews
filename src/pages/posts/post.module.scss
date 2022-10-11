@@ -56,12 +56,13 @@
   margin: 4rem 0 2rem;
 
   a {
-    color: var(--purple-500);
+    color: var(--yellow-500);
+    margin-left: 0.5rem;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: all 0.2s;
 
     &:hover {
-      color: var(--purple-400);
+      text-decoration: underline;
     }
   }
 }
