@@ -16,6 +16,9 @@ This project uses lot of stuff as:
 - [SASS](https://sass-lang.com/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
+- [FaunaDB](https://fauna.com/)
+- [Stripe](https://stripe.com/)
+- [Prismic](https://prismic.io/)
 
 ## Getting Started
 
