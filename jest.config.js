@@ -1,6 +1,6 @@
 module.exports = {
   testIgnorePatterns: ["<rootDir>/node_modules/"],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>"
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
   }
 };
