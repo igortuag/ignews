@@ -11,6 +11,14 @@ jest.mock("next/router", () => {
   };
 });
 
+jest.mock("next-auth/client", () => {
+  return {
+    useSession() {
+      return [null, false];
+    },
+  };
+});
+
 describe("ActiveLink component", () => {
   it("renders correctly", () => {
     const { getByText } = render(
