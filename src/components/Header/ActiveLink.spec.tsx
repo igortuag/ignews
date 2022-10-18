@@ -18,5 +18,6 @@ describe("Header component", () => {
     );
 
     expect(getByText("Home")).toBeInTheDocument();
+    expect(getByText("Posts")).toBeInTheDocument();
   });
 });
