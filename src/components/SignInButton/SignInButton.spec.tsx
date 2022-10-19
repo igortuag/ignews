@@ -10,10 +10,9 @@ jest.mock("next-auth/client", () => {
 });
 
 describe("SignInButton component", () => {
-  it("renders correctly", () => {
+  it("renders correctly when user is not authenticated", () => {
     render(<SignInButton />);
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("Posts")).toBeInTheDocument();
+    expect(screen.getByText("Sign in with Github")).toBeInTheDocument();
   });
 });
