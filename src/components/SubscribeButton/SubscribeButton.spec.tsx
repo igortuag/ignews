@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import SubscribeButton from ".";
 import { signIn } from "next-auth/react";
-import { push } from "next/router";
+import { useRouter } from "next/router";
 import { mocked } from "ts-jest/utils";
 
 jest.mock("next-auth/client", () => {
@@ -10,11 +10,7 @@ jest.mock("next-auth/client", () => {
   };
 });
 
-jest.mock("next/router", () => {
-  return {
-    push: jest.fn(),
-  };
-});
+jest.mock("next/router");
 
 describe("SubscribeButton component", () => {
   it("renders correctly", () => {
@@ -36,7 +32,11 @@ describe("SubscribeButton component", () => {
   });
 
   it("redirects to posts when user already has a subscription", () => {
-    const pushMocked = mocked(push);
+    const useRouterMocked = mocked(useRouter);
+
+    useRouterMocked.mockReturnValueOnce({
+      push: jest.fn(),
+    } as any);
 
     render(<SubscribeButton priceId="123" />);
 
@@ -44,6 +44,6 @@ describe("SubscribeButton component", () => {
 
     fireEvent.click(subscribeButton);
 
-    expect(pushMocked).toHaveBeenCalledWith("/posts");
+    expect(useRouterMocked).toHaveBeenCalledWith("/posts");
   });
 });
