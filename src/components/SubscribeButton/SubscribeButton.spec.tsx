@@ -4,22 +4,23 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { mocked } from "ts-jest/utils";
 
-jest.mock("next-auth/client", () => {
-  return {
-    useSession: () => [null, false],
-  };
-});
-
+jest.mock("next-auth/client");
 jest.mock("next/router");
 
 describe("SubscribeButton component", () => {
   it("renders correctly", () => {
+    const useSessionMocked = mocked(useSession);
+    useSessionMocked.mockReturnValueOnce([null, false]);
+
     render(<SubscribeButton priceId="123" />);
 
     expect(screen.getByText("Sign in with Github")).toBeInTheDocument();
   });
 
   it("redirects user to sign in when not authenticated", () => {
+    const useSessionMocked = mocked(useSession);
+    useSessionMocked.mockReturnValueOnce([null, false]);
+    
     const signInMocked = mocked(signIn);
 
     render(<SubscribeButton priceId="123" />);
