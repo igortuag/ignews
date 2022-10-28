@@ -3,9 +3,10 @@ import Post, { getServerSideProps } from "../pages/post";
 import { mocked } from "ts-jest/utils";
 
 import { prismic } from "../../services/prismic";
+import { getSession } from "next-auth/react";
 
 jest.mock("../../services/stripe");
-
+jest.mock('next-auth/react', () => { })
 jest.mock("../../services/prismic");
 
 const post = {
@@ -23,14 +24,8 @@ describe("Post page", () => {
   });
 
   it("redirects user if no subscription is found", async () => {
-    const getSessionMocked = mocked({
-      req: {
-        cookies: {},
-      },
-      params: {
-        slug: "my-new-post",
-      }
-    });
+    const getSessionMocked = mocked(getSession);
+
     getSessionMocked.mockReturnValueOnce([null, false]);
 
     const response = await getServerSideProps({
