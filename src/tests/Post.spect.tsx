@@ -22,39 +22,27 @@ describe("Post page", () => {
     expect(screen.getByText(/My new post/i)).toBeInTheDocument();
   });
 
-  // it("loads initial data", async () => {
-  //   const getPrismicClientMocked = mocked(prismic.getPrismicClient);
+  it("redirects user if no subscription is found", async () => {
+    const getSessionMocked = mocked({
+      req: {
+        cookies: {},
+      },
+      params: {
+        slug: "my-new-post",
+      }
+    });
+    getSessionMocked.mockReturnValueOnce([null, false]);
 
-  //   getPrismicClientMocked.mockReturnValueOnce({
-  //     query: jest.fn().mockResolvedValueOnce({
-  //       results: [
-  //         {
-  //           uid: "my-new-post",
-  //           data: {
-  //             title: [{ type: "heading", text: "My new post" }],
-  //             content: [{ type: "paragraph", text: "Post excerpt" }],
-  //           },
-  //           last_publication_date: "04-01-2021",
-  //         },
-  //       ],
-  //     }),
-  //   } as any);
+    const response = await getServerSideProps({
+      params: { slug: "my-new-post" },
+    } as any);
 
-  //   const response = await getStaticProps({} as any);
-
-  //   expect(response).toEqual(
-  //     expect.objectContaining({
-  //       props: {
-  //         post: [
-  //           {
-  //             slug: "my-new-post",
-  //             title: "My new post",
-  //             content: "<p>Post excerpt</p>",
-  //             updatedAt: "01 de abril de 2021",
-  //           },
-  //         ],
-  //       },
-  //     })
-  //   );
-  // });
+    expect(response).toEqual(
+      expect.objectContaining({
+        redirect: expect.objectContaining({
+          destination: "/",
+        }),
+      })
+    );
+  });
 });
