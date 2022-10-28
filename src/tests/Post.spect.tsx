@@ -1,61 +1,42 @@
 import { render, screen } from "@testing-library/react";
-import Posts, { getStaticProps } from "../pages/posts";
+import Post, { getServerSideProps } from "../pages/post";
 import { mocked } from "ts-jest/utils";
 
 import { prismic } from "../../services/prismic";
+import { getSession } from "next-auth/react";
 
 jest.mock("../../services/stripe");
-
+jest.mock('next-auth/react', () => { })
 jest.mock("../../services/prismic");
 
-const posts = [
-  {
-    slug: "my-new-post",
-    title: "My new post",
-    content: "<p>Post excerpt</p>",
-    updatedAt: "10 de Abril",
-  },
-];
+const post = {
+  slug: "my-new-post",
+  title: "My new post",
+  content: "<p>Post excerpt</p>",
+  updatedAt: "10 de Abril",
+};
 
-describe("Posts page", () => {
+describe("Post page", () => {
   it("renders correctly", () => {
-    render(<Posts posts={posts} />);
+    render(<Post post={post} />);
 
     expect(screen.getByText(/My new post/i)).toBeInTheDocument();
   });
 
-  it("loads initial data", async () => {
-    const getPrismicClientMocked = mocked(prismic.getPrismicClient);
+  it("redirects user if no subscription is found", async () => {
+    const getSessionMocked = mocked(getSession);
 
-    getPrismicClientMocked.mockReturnValueOnce({
-      query: jest.fn().mockResolvedValueOnce({
-        results: [
-          {
-            uid: "my-new-post",
-            data: {
-              title: [{ type: "heading", text: "My new post" }],
-              content: [{ type: "paragraph", text: "Post excerpt" }],
-            },
-            last_publication_date: "04-01-2021",
-          },
-        ],
-      }),
+    getSessionMocked.mockReturnValueOnce([null, false]);
+
+    const response = await getServerSideProps({
+      params: { slug: "my-new-post" },
     } as any);
-
-    const response = await getStaticProps({} as any);
 
     expect(response).toEqual(
       expect.objectContaining({
-        props: {
-          posts: [
-            {
-              slug: "my-new-post",
-              title: "My new post",
-              content: "<p>Post excerpt</p>",
-              updatedAt: "01 de abril de 2021",
-            },
-          ],
-        },
+        redirect: expect.objectContaining({
+          destination: "/",
+        }),
       })
     );
   });
