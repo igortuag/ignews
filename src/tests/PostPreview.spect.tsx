@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { useSession } from "next-auth/react";
 import PostPreview, { getStaticPaths } from "../pages/posts/preview/[slug]";
 import { mocked } from "ts-jest/utils";
 
@@ -18,6 +19,10 @@ const postPreview = {
 
 describe("Post preview page", () => {
   it("renders correctly", () => {
+    const useSessionMocked = mocked(useSession);
+
+    useSessionMocked.mockReturnValueOnce([null, false]);
+
     render(<PostPreview post={postPreview} />);
 
     expect(screen.getByText(/My new postPreview/i)).toBeInTheDocument();
