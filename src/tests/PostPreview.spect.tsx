@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import PostPreview, { getStaticPaths } from "../pages/posts/preview/[slug]";
+import PostPreview, { getStaticProps } from "../pages/posts/preview/[slug]";
 import { mocked } from "ts-jest/utils";
 
 import { prismic } from "../../services/prismic";
@@ -52,40 +52,34 @@ describe("Post preview page", () => {
     expect(pushMock).toHaveBeenCalledWith("/posts/my-new-postPreview");
   });
 
-  // it("loads initial data", async () => {
-  //   const getSessionMocked = mocked(getSession);
-  //   const getPrismicClientMocked = mocked(prismic);
+  it("loads initial data", async () => {
+    const getPrismicClientMocked = mocked(prismic);
 
-  //   getSessionMocked.mockReturnValueOnce([
-  //     { activeSubscription: "fake-active-subscription" },
-  //     false,
-  //   ] as any);
+    getPrismicClientMocked.mockReturnValueOnce({
+      getByUID: jest.fn().mockResolvedValueOnce({
+        data: {
+          title: [{ type: "heading", text: "My new postPreview" }],
+          content: [{ type: "paragraph", text: "PostPreview excerpt" }],
+        },
+        last_publication_date: "04-01-2021",
+      }),
+    } as any);
 
-  //   getPrismicClientMocked.mockReturnValueOnce({
-  //     getByUID: jest.fn().mockResolvedValueOnce({
-  //       data: {
-  //         title: [{ type: "heading", text: "My new postPreview" }],
-  //         content: [{ type: "paragraph", text: "PostPreview excerpt" }],
-  //       },
-  //       last_publication_date: "04-01-2021",
-  //     }),
-  //   } as any);
+    const response = await getStaticProps({
+      params: { slug: "my-new-postPreview" },
+    } as any);
 
-  //   const response = await getServerSideProps({
-  //     params: { slug: "my-new-postPreview" },
-  //   } as any);
-
-  //   expect(response).toEqual(
-  //     expect.objectContaining({
-  //       props: {
-  //         postPreview: {
-  //           slug: "my-new-postPreview",
-  //           title: "My new postPreview",
-  //           content: "<p>PostPreview excerpt</p>",
-  //           updatedAt: "01 de abril de 2021",
-  //         },
-  //       },
-  //     })
-  //   );
-  // });
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: {
+          postPreview: {
+            slug: "my-new-postPreview",
+            title: "My new postPreview",
+            content: "<p>PostPreview excerpt</p>",
+            updatedAt: "01 de abril de 2021",
+          },
+        },
+      })
+    );
+  });
 });
