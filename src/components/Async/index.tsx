@@ -4,13 +4,15 @@ export function Async() {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {
+      setIsButtonVisible(true);
+    }, 1000);
   }, []);
 
   return (
     <div>
       <div>Hello World</div>
-      {isButtonVisible && <button>Teste</button>}
+      {isButtonVisible && <button>Button</button>}
     </div>
   );
 }
