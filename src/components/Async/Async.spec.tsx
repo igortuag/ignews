@@ -1,8 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 test("it renders correctly", async () => {
   render(<div>Hello World</div>);
 
   expect(screen.getByText("Hello World")).toBeInTheDocument();
-  expect(await screen.findByText("Button")).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.getByText("Button")).toBeInTheDocument();
+  });
 });
