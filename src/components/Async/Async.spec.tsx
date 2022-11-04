@@ -8,4 +8,7 @@ test("it renders correctly", async () => {
   await waitFor(() => {
     expect(screen.getByText("Button")).toBeInTheDocument();
   });
+  await waitFor(() => {
+    expect(screen.getByText("Invisible Button")).not.toBeInTheDocument();
+  });
 });
