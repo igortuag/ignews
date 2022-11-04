@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 
 test("it renders correctly", async () => {
   render(<div>Hello World</div>);
@@ -8,4 +8,6 @@ test("it renders correctly", async () => {
   await waitFor(() => {
     expect(screen.getByText("Button")).toBeInTheDocument();
   });
+
+  await waitForElementToBeRemoved(screen.queryByText("Invisible Button"));
 });
