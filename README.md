@@ -19,6 +19,7 @@ This project uses lot of stuff as:
 - [FaunaDB](https://fauna.com/)
 - [Stripe](https://stripe.com/)
 - [Prismic](https://prismic.io/)
+- [JestJS](https://jestjs.io/)
 
 ## Getting Started
 
