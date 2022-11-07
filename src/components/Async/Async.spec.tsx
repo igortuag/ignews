@@ -9,11 +9,6 @@ import Async from ".";
 test("it renders correctly", async () => {
   render(<Async />);
 
-  console.log(
-    "screen.logTestingPlaygroundURL() :>> ",
-    screen.logTestingPlaygroundURL()
-  );
-
   expect(screen.getByText("Hello World")).toBeInTheDocument();
 
   await waitFor(() => {
