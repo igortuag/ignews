@@ -7,4 +7,6 @@ module.exports = {
   moduleNameMapper: {
     "\\.(scss|css|sass)$": "identity-obj-proxy",
   },
+  collectCoverage: true,
+
 };
