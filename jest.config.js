@@ -10,10 +10,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     "src/**/*.tsx",
-    "!src/**/*.spec.{tsx}",
-    "!src/**/_app.tsx",
-    "!src/**/_document.tsx",
+    "!src/**/*.spec.tsx",
   ],
-  coverageReporters: ["json", "lcov"],
-  testEnvironment: "jsdom",
+  coverageReporters: ["lcov", "json"],
 };
