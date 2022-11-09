@@ -20,6 +20,8 @@ This project uses lot of stuff as:
 - [Stripe](https://stripe.com/)
 - [Prismic](https://prismic.io/)
 - [JestJS](https://jestjs.io/)
+- [Axios](https://axios-http.com/)
+- [React Icons](https://react-icons.github.io/react-icons/)
 
 ## Getting Started
 
