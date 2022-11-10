@@ -7,6 +7,9 @@
 
 This is a [Next.js](https://nextjs.org/) project, develop to follow a course from Rocketseat
 
+👀 Preview
+
+
 ## What is inside?
 
 This project uses lot of stuff as:

@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import Post, { getServerSideProps } from "../pages/post";
+import Post, { getServerSideProps } from "../pages/posts/[slug]";
 import { mocked } from "ts-jest/utils";
 
-import { prismic } from "../../services/prismic";
+import { getPrismicClient } from "../services/prismic";
 import { getSession } from "next-auth/react";
 
 jest.mock("../../services/stripe");
 jest.mock('next-auth/react', () => { })
-jest.mock("../../services/prismic");
+jest.mock("../services/getPrismicClient");
 
 const post = {
   slug: "my-new-post",
@@ -26,7 +26,9 @@ describe("Post page", () => {
   it("redirects user if no subscription is found", async () => {
     const getSessionMocked = mocked(getSession);
 
-    getSessionMocked.mockReturnValueOnce([null, false]);
+    getSessionMocked.mockReturnValueOnce({
+      activeSubscription: null,
+    } as any);
 
     const response = await getServerSideProps({
       params: { slug: "my-new-post" },
@@ -43,7 +45,7 @@ describe("Post page", () => {
 
   it("loads initial data", async () => { 
     const getSessionMocked = mocked(getSession);
-    const getPrismicClientMocked = mocked(prismic);
+    const getPrismicClientMocked = mocked(getPrismicClient);
 
     getSessionMocked.mockReturnValueOnce([
       { activeSubscription: "fake-active-subscription" },

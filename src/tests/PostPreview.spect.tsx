@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import PostPreview, { getStaticProps } from "../pages/posts/preview/[slug]";
 import { mocked } from "ts-jest/utils";
 
-import { prismic } from "../../services/prismic";
+import { prismic } from "../services/prismic";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -23,7 +23,12 @@ describe("Post preview page", () => {
   it("renders correctly", () => {
     const useSessionMocked = mocked(useSession);
 
-    useSessionMocked.mockReturnValueOnce([null, false]);
+    useSessionMocked.mockReturnValueOnce([
+      {
+        activeSubscription: "fake-active-subscription",
+      },
+      false,
+    ] as any);
 
     render(<PostPreview post={postPreview} />);
 
@@ -55,15 +60,15 @@ describe("Post preview page", () => {
   it("loads initial data", async () => {
     const getPrismicClientMocked = mocked(prismic);
 
-    getPrismicClientMocked.mockReturnValueOnce({
-      getByUID: jest.fn().mockResolvedValueOnce({
-        data: {
-          title: [{ type: "heading", text: "My new postPreview" }],
-          content: [{ type: "paragraph", text: "PostPreview excerpt" }],
-        },
-        last_publication_date: "04-01-2021",
-      }),
-    } as any);
+    // getPrismicClientMocked.mockReturnValueOnce({
+    //   getByUID: jest.fn().mockResolvedValueOnce({
+    //     data: {
+    //       title: [{ type: "heading", text: "My new postPreview" }],
+    //       content: [{ type: "paragraph", text: "PostPreview excerpt" }],
+    //     },
+    //     last_publication_date: "04-01-2021",
+    //   }),
+    // } as any);
 
     const response = await getStaticProps({
       params: { slug: "my-new-postPreview" },

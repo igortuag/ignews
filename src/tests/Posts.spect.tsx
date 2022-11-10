@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Posts, { getStaticProps } from "../pages/posts";
 import { mocked } from "ts-jest/utils";
 
-import { prismic } from "../../services/prismic";
+import { prismic } from "../services/prismic";
 
 jest.mock("../../services/stripe");
 
@@ -12,7 +12,7 @@ const posts = [
   {
     slug: "my-new-post",
     title: "My new post",
-    content: "<p>Post excerpt</p>",
+    excerpt: "<p>Post excerpt</p>",
     updatedAt: "10 de Abril",
   },
 ];
