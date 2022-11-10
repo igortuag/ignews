@@ -60,15 +60,15 @@ describe("Post preview page", () => {
   it("loads initial data", async () => {
     const getPrismicClientMocked = mocked(prismic);
 
-    getPrismicClientMocked.mockReturnValueOnce({
-      getByUID: jest.fn().mockResolvedValueOnce({
-        data: {
-          title: [{ type: "heading", text: "My new postPreview" }],
-          content: [{ type: "paragraph", text: "PostPreview excerpt" }],
-        },
-        last_publication_date: "04-01-2021",
-      }),
-    } as any);
+    // getPrismicClientMocked.mockReturnValueOnce({
+    //   getByUID: jest.fn().mockResolvedValueOnce({
+    //     data: {
+    //       title: [{ type: "heading", text: "My new postPreview" }],
+    //       content: [{ type: "paragraph", text: "PostPreview excerpt" }],
+    //     },
+    //     last_publication_date: "04-01-2021",
+    //   }),
+    // } as any);
 
     const response = await getStaticProps({
       params: { slug: "my-new-postPreview" },
