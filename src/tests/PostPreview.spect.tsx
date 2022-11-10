@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import PostPreview, { getStaticProps } from "../pages/posts/preview/[slug]";
 import { mocked } from "ts-jest/utils";
 
-import { prismic } from "../../services/prismic";
+import { prismic } from "../services/prismic";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -23,7 +23,12 @@ describe("Post preview page", () => {
   it("renders correctly", () => {
     const useSessionMocked = mocked(useSession);
 
-    useSessionMocked.mockReturnValueOnce([null, false]);
+    useSessionMocked.mockReturnValueOnce([
+      {
+        activeSubscription: "fake-active-subscription",
+      },
+      false,
+    ] as any);
 
     render(<PostPreview post={postPreview} />);
 

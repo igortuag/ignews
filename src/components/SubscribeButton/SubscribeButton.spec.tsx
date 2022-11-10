@@ -10,7 +10,12 @@ jest.mock("next/router");
 describe("SubscribeButton component", () => {
   it("renders correctly", () => {
     const useSessionMocked = mocked(useSession);
-    useSessionMocked.mockReturnValueOnce([null, false]);
+    useSessionMocked.mockReturnValueOnce([
+      {
+        activeSubscription: "fake-active-subscription",
+      },
+      false,
+    ] as any);
 
     render(<SubscribeButton priceId="123" />);
 
@@ -19,8 +24,13 @@ describe("SubscribeButton component", () => {
 
   it("redirects user to sign in when not authenticated", () => {
     const useSessionMocked = mocked(useSession);
-    useSessionMocked.mockReturnValueOnce([null, false]);
-    
+    useSessionMocked.mockReturnValueOnce([
+      {
+        activeSubscription: "fake-active-subscription",
+      },
+      false,
+    ] as any);
+
     const signInMocked = mocked(signIn);
 
     render(<SubscribeButton priceId="123" />);
@@ -37,17 +47,14 @@ describe("SubscribeButton component", () => {
     const useSessionMocked = mocked(useSession);
     const pushMock = jest.fn();
 
-    useSessionMocked.mockReturnValueOnce([
-      {
-        user: {
-          name: "John Doe",
-          email: "john@dow.com",
-        },
-        activeSubscription: "fake-active-subscription",
-        expires: "fake-expires",
+    useSessionMocked.mockReturnValueOnce({
+      user: {
+        name: "John Doe",
+        email: "john@dow.com",
       },
-      false,
-    ]);
+      activeSubscription: "fake-active-subscription",
+      expires: "fake-expires",
+    } as any);
 
     useRouterMocked.mockReturnValueOnce({
       push: pushMock,

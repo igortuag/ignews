@@ -26,7 +26,9 @@ describe("Post page", () => {
   it("redirects user if no subscription is found", async () => {
     const getSessionMocked = mocked(getSession);
 
-    getSessionMocked.mockReturnValueOnce([null, false]);
+    getSessionMocked.mockReturnValueOnce({
+      activeSubscription: null,
+    } as any);
 
     const response = await getServerSideProps({
       params: { slug: "my-new-post" },

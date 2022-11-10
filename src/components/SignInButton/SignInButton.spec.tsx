@@ -9,7 +9,12 @@ describe("SignInButton component", () => {
   it("renders correctly when user is not authenticated", () => {
     const useSessionMocked = mocked(useSession);
 
-    useSessionMocked.mockReturnValueOnce([null, false]);
+    useSessionMocked.mockReturnValueOnce([
+      {
+        activeSubscription: "fake-active-subscription",
+      },
+      false,
+    ] as any);
 
     render(<SignInButton />);
 
@@ -21,14 +26,10 @@ describe("SignInButton component", () => {
 
     useSessionMocked.mockReturnValueOnce([
       {
-        user: {
-          name: "John Doe",
-          email: "",
-        },
-        expires: "fake-expires",
+        activeSubscription: "fake-active-subscription",
       },
       false,
-    ]);
+    ] as any);
 
     render(<SignInButton />);
 
