@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   );
 
-  const posts = response.results.map((post) => {
+  const posts = response?.results?.map((post) => {
     return {
       slug: post.uid,
       title: RichText.asText(post.data.title),
