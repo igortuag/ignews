@@ -9,4 +9,4 @@ export function getPrismicClient(req?: unknown) {
   return prismic;
 }
 
-export const prismic = getPrismicClient
+export const prismic = { getPrismicClient };
